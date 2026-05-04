@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kimetsu no Yaiba — Personagens</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="header">
+      <h1>Kimetsu no Yaiba - Personagens</h1>
+      <p>Digite para buscar entre os personagens</p>
+    </div>
+
+    <div class="search-row">
+      <input
+        type="text"
+        id="search-input"
+        placeholder='Ex: "Tanjiro", "Zenitsu" ou sobrenome "Kamado"'
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="label">Total de personagens</div>
+        <div class="value" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Elenco principal</div>
+        <div class="value" id="stat-main">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Coadjuvantes</div>
+        <div class="value" id="stat-support">—</div>
+      </div>
+    </div>
+
+    <div id="results-section"></div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
