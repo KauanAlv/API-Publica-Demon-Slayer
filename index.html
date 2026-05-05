@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kimetsu no Yaiba — Personagens</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="main.js" defer></script>
 </head>
+
 <body>
 
-  <div class="wrap">
-    <div class="header">
-      <h1>Kimetsu no Yaiba - Personagens</h1>
-      <p>Digite para buscar entre os personagens</p>
-    </div>
-
-    <div class="search-row">
-      <input
-        type="text"
-        id="search-input"
-        placeholder='Ex: "Tanjiro", "Zenitsu" ou sobrenome "Kamado"'
-        autocomplete="off"
-        spellcheck="false"
-      />
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="label">Total de personagens</div>
-        <div class="value" id="stat-total">—</div>
-      </div>
-      <div class="stat-card">
-        <div class="label">Elenco principal</div>
-        <div class="value" id="stat-main">—</div>
-      </div>
-      <div class="stat-card">
-        <div class="label">Coadjuvantes</div>
-        <div class="value" id="stat-support">—</div>
-      </div>
-    </div>
-
-    <div id="results-section"></div>
+  <div class="header">
+    <h1>Kimetsu no Yaiba - Personagens</h1>
+    <p>Digite para buscar entre os personagens</p>
   </div>
 
-  <script src="main.js"></script>
+  <div class="busca">
+    <input type="text" id="barra-pesquisa" placeholder='Ex: "Tanjirou", "Zenitsu" ou "Kamado"' />
+  </div>
+
+  <div class="estatisticas">
+    <div class="card">
+      <div class="texto-card">Total de personagens</div>
+      <div class="valor" id="total">—</div>
+    </div>
+    <div class="card">
+      <div class="texto-card">Elenco principal</div>
+      <div class="valor" id="principal">—</div>
+    </div>
+    <div class="card">
+      <div class="texto-card">Coadjuvantes</div>
+      <div class="valor" id="coadjuvante">—</div>
+    </div>
+  </div>
+
+  <div id="resultado">
+    <div class="results-title">Exemplo de personagem</div>
+
+    <div class="container-resultado">
+      <div class="cards-principais" id="card-modelo">
+        <img class="card-img" src="./imagem-teste.jpg" alt="Tanjirou Kamado" />
+
+        <div class="personagem">
+          <div class="nome-personagem">Tanjirou Kamado</div>
+          <span class="classificacao">Principal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Kauan Alves. Todos os direitos reservados.
+  </footer>
+
 </body>
+
 </html>
