@@ -10,7 +10,7 @@ async function getPersonagens() {
   const url = "https://api.jikan.moe/v4/anime/38000/characters"
   const response = await fetch(url)
   const data = await response.json()
-  return data
+  return data.data
 }
 
 // formatar nome
