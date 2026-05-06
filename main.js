@@ -10,7 +10,7 @@ async function getPersonagens() {
   const url = "https://api.jikan.moe/v4/anime/38000/characters"
   const response = await fetch(url)
   const data = await response.json()
-  return data.data
+  return data
 }
 
 // formatar nome
@@ -27,7 +27,7 @@ function atualizarEstatisticas(lista) {
   const total = lista.length
   let principal = 0
 
-  lista.forEach(p => {
+  lista.forEach(function (p) {
     if (p.role === "Main") {
       principal++
     }
