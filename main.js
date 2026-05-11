@@ -1,11 +1,10 @@
 'use strict'
 
 const resultado = document.getElementById('resultado')
-const input = document.getElementById('barra-pesquisa')
+const pesquisa = document.getElementById('barra-pesquisa')
 
 let personagens = []
 
-// pegar dados da API
 async function getPersonagens() {
   const url = "https://api.jikan.moe/v4/anime/38000/characters"
   const response = await fetch(url)
@@ -13,7 +12,6 @@ async function getPersonagens() {
   return data.data
 }
 
-// formatar nome
 function formatarNome(nome) {
   const partes = nome.split(',')
   if (partes.length > 1) {
@@ -22,13 +20,12 @@ function formatarNome(nome) {
   return nome
 }
 
-// atualizar estatísticas
 function atualizarEstatisticas(lista) {
   const total = lista.length
   let principal = 0
 
-  lista.forEach(function (p) {
-    if (p.role === "Main") {
+  lista.forEach(function (itemLista) {
+    if (itemLista.role === "Main") {
       principal++
     }
   })
@@ -40,59 +37,83 @@ function atualizarEstatisticas(lista) {
   document.getElementById("coadjuvante").textContent = coadjuvante
 }
 
-// criar cards
 function criarCards(lista) {
-  let html = ""
 
-  lista.forEach(p => {
-    const nome = formatarNome(p.character.name)
-    const imagem = p.character.images.jpg.image_url
+  const container = document.createElement('div')
 
-    let tipo = "coadjuvante"
-    let texto = "Coadjuvante"
+  container.classList.add('container-resultado')
 
-    if (p.role === "Main") {
-      tipo = "principal"
-      texto = "Principal"
+  for (let i = 0; i < lista.length; i++) {
+
+    const itemLista = lista[i]
+
+    const nome = formatarNome(itemLista.character.name)
+    const imagem = itemLista.character.images.jpg.image_url
+
+    let tipo = 'coadjuvante'
+    let texto = 'Coadjuvante'
+
+    if (itemLista.role === 'Main') {
+      tipo = 'principal'
+      texto = 'Principal'
     }
 
-    html += `
-      <div class="cards-principais">
-        <img class="card-img" src="${imagem}" alt="${nome}">
-        
-        <div class="personagem">
-          <div class="nome-personagem">${nome}</div>
+    const card = document.createElement('div')
+    card.classList.add('cards-principais')
 
-          <span class="classificacao ${tipo}">
-            ${texto}
-          </span>
-        </div>
-      </div>
-    `
-  })
+    const img = document.createElement('img')
+    img.classList.add('card-img')
+    img.src = imagem
+    img.alt = nome
 
-  resultado.innerHTML = `
-    <div class="results-title">Personagens</div>
-    <div class="container-resultado">
-      ${html}
-    </div>
-  `
+    const personagem = document.createElement('div')
+    personagem.classList.add('personagem')
+
+    const nomePersonagem = document.createElement('div')
+    nomePersonagem.classList.add('nome-personagem')
+    nomePersonagem.textContent = nome
+
+    const classificacao = document.createElement('span')
+    classificacao.classList.add('classificacao')
+    classificacao.classList.add(tipo)
+    classificacao.textContent = texto
+
+    personagem.appendChild(nomePersonagem)
+    personagem.appendChild(classificacao)
+
+    card.appendChild(img)
+    card.appendChild(personagem)
+
+    container.appendChild(card)
+  }
+
+  resultado.textContent = ''
+
+  const titulo = document.createElement('div')
+  titulo.classList.add('results-title')
+  titulo.textContent = 'Personagens'
+
+  resultado.appendChild(titulo)
+  resultado.appendChild(container)
 }
 
-// busca
 function buscar() {
-  const valor = input.value.toLowerCase()
 
-  const filtrados = personagens.filter(p => {
-    const nome = formatarNome(p.character.name).toLowerCase()
+  const valor = pesquisa.value.toLowerCase()
+
+  const filtrados = personagens.filter(function (itemFormatado) {
+
+    const nome = formatarNome(itemFormatado.character.name).toLowerCase()
+
     return nome.includes(valor)
   })
+  atualizarEstatisticas(filtrados)
+  criarCards(filtrados)
 
   atualizarEstatisticas(filtrados)
   criarCards(filtrados)
 }
 
-// carregar tudo
 async function carregar() {
   const dados = await getPersonagens()
   personagens = dados
@@ -101,8 +122,6 @@ async function carregar() {
   criarCards(personagens)
 }
 
-// evento
-input.addEventListener('input', buscar)
+pesquisa.addEventListener('input', buscar)
 
-// iniciar
 carregar()
