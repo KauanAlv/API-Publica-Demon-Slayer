@@ -13,14 +13,17 @@ async function getPersonagens() {
 }
 
 function formatarNome(nome) {
+
   const partes = nome.split(',')
   if (partes.length > 1) {
     return partes[1].trim() + " " + partes[0].trim()
   }
+
   return nome
 }
 
 function atualizarEstatisticas(lista) {
+
   const total = lista.length
   let principal = 0
 
@@ -40,13 +43,11 @@ function atualizarEstatisticas(lista) {
 function criarCards(lista) {
 
   const container = document.createElement('div')
-
   container.classList.add('container-resultado')
 
   for (let i = 0; i < lista.length; i++) {
 
     const itemLista = lista[i]
-
     const nome = formatarNome(itemLista.character.name)
     const imagem = itemLista.character.images.jpg.image_url
 
@@ -102,19 +103,17 @@ function buscar() {
   const valor = pesquisa.value.toLowerCase()
 
   const filtrados = personagens.filter(function (itemFormatado) {
-
     const nome = formatarNome(itemFormatado.character.name).toLowerCase()
 
     return nome.includes(valor)
   })
-  atualizarEstatisticas(filtrados)
-  criarCards(filtrados)
 
   atualizarEstatisticas(filtrados)
   criarCards(filtrados)
 }
 
 async function carregar() {
+
   const dados = await getPersonagens()
   personagens = dados
 
